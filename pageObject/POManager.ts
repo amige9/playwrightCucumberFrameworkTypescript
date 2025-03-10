@@ -1,20 +1,19 @@
 import { Page } from '@playwright/test';
-import SponsorLoginPage from '../pageObject/SponsorLoginPage';
-
+import LoginPage from '../pageObject/LoginPage'
 
 class POManager{
     public page:Page;
-    public sponsorLoginPage:SponsorLoginPage;
+    public loginPage: LoginPage
     // public logger;
 
     constructor(page:Page){
         this.page = page
-        this.sponsorLoginPage = new SponsorLoginPage(this.page);
+        this.loginPage = new LoginPage(this.page)
     }
 
 
-    getSponsorLoginPage(){
-        return this.sponsorLoginPage;
+    getLoginPage(){
+        return this.loginPage;
     }
 }
 

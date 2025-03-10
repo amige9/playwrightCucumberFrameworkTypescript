@@ -3,9 +3,10 @@ import { Given, When, Then, setDefaultTimeout } from "@cucumber/cucumber";
 setDefaultTimeout(150 * 1000);
 
 Given('the sponsor navigates to the login page', async function () {
-      this.loginPage = this.poManager.getSponsorLoginPage();
+      this.loginPage = this.poManager.getLoginPage();
       await this.loginPage.goTo();
       this.page.logger?.info("Navigated to the URL");
+      await this.page.pause();
       // (this.page as any).logger.info("Navigated to the URL");
 
     });
@@ -21,8 +22,8 @@ When("the sponsor clicks on the sign in button", async function(){
 })
 
 Then("the sponsor should be logged in", async function (){
-      // await this.loginPage.assertLoginIsSuccessful()
-      // this.page.logger?.info("Assert the sign in is successful");
+      await this.loginPage.assertLoggedInSuccessfully();
+      this.page.logger?.info("Assert the sign in is successful");
 
 })
 
