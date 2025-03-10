@@ -6,7 +6,6 @@ Given('the sponsor navigates to the login page', async function () {
       this.loginPage = this.poManager.getLoginPage();
       await this.loginPage.goTo();
       this.page.logger?.info("Navigated to the URL");
-      await this.page.pause();
       // (this.page as any).logger.info("Navigated to the URL");
 
     });
