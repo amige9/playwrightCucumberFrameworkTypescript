@@ -26,7 +26,10 @@ jobs:
     - name: Setup npm cache
       uses: actions/cache@v3
       with:
-        path: '%AppData%/npm-cache'
+        path: |
+          %AppData%/npm-cache
+          %LocalAppData%/npm-cache
+          ~/.npm
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
