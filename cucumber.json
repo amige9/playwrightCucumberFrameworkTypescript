@@ -16,6 +16,7 @@
         ],
         "format": [
             "progress-bar",
+            "html:playwright-report/result.html",
             "json:test-results/HTMLReport/cucumber-report.json",
             "rerun:@rerun.txt"
         ],

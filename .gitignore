@@ -1,6 +1,5 @@
 node_modules/
 /test-results/
-/playwright-report/
 /blob-report/
 /playwright/.cache/
 /test-results/
@@ -9,4 +8,4 @@ node_modules/
 /playwright/.cache/
 assets
 @rerun.txt
-index.html
+/playwright-report/
