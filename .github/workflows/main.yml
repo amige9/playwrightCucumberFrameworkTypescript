@@ -74,17 +74,17 @@ jobs:
       run: npx playwright install --with-deps
       
     - name: Install report generation dependencies
-      run: npm install cross-env cucumber-html-reporter --no-save
+      run: npm install -g cross-env 
       
     - name: Run Cucumber tests with Playwright
-      run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit --format json:cucumber-report.json
+      run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit 
       env:
         CI: true
       continue-on-error: true  # Continue workflow even if tests fail
 
     - name: Generate HTML report from Cucumber JSON
       if: always()
-      run: npx cucumber-html-reporter --json cucumber-report.json --output cucumber-report.html
+      run: npm run posttest
       continue-on-error: true  # Continue even if report generation fails
 
     - name: Upload Cucumber reports
@@ -93,8 +93,10 @@ jobs:
       with:
         name: cucumber-reports
         path: |
+          reports/
           cucumber-report.json
-          cucumber-report.html
+          **/cucumber-*.json
+          **/cucumber-*.html
         retention-days: 30
         
     - name: Upload Playwright traces
@@ -102,5 +104,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: playwright-traces
-        path: test-results/
+        path: | 
+          test-results/
+          playwright-report/
         retention-days: 30
