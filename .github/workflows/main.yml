@@ -39,5 +39,5 @@ jobs:
       if: always() # Always upload test results, even if tests fail
       with:
         name: playwright-report
-        path: test-result/
+        path: test-result.json
         retention-days: 30
