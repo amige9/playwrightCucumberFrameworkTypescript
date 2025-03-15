@@ -72,9 +72,9 @@ jobs:
       
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-
-    - name: Install cross-env globally
-      run: npm install -g cross-env
+      
+    - name: Install report generation dependencies
+      run: npm install cross-env cucumber-html-reporter --no-save
       
     - name: Run Cucumber tests with Playwright
       run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit --format json:cucumber-report.json
@@ -84,9 +84,8 @@ jobs:
 
     - name: Generate HTML report from Cucumber JSON
       if: always()
-      run: |
-        npm install -g cucumber-html-reporter
-        npx cucumber-html-reporter --json cucumber-report.json --output cucumber-report.html
+      run: npx cucumber-html-reporter --json cucumber-report.json --output cucumber-report.html
+      continue-on-error: true  # Continue even if report generation fails
 
     - name: Upload Cucumber reports
       if: always()
