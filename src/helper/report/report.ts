@@ -1,10 +1,14 @@
 const report = require("multiple-cucumber-html-reporter");
 import os from 'os';
 
+// Get report paths from environment variables or use defaults
+const jsonDir = process.env.REPORT_JSON_DIR || "test-results/HTMLReport/";
+const reportPath = process.env.REPORT_PATH || "test-results/HTMLReport/";
+
 // Using Multiple Cucumber HTML Report
 report.generate({
-  jsonDir: "test-results/HTMLReport/",
-  reportPath: "test-results/HTMLReport/",
+  jsonDir: jsonDir,
+  reportPath: reportPath,
   reportName: "e-Offering Automation Report",
   displayDuration: true,
   openReportInBrowser: true,
@@ -25,12 +29,47 @@ report.generate({
     data: [
       { label: "Project", value: "e-Offering project" },
       { label: "Environment", value: "UAT" },
-    //   { label: "Cycle", value: "B11221.34321" },
-    //   { label: "Execution Start Time", value: "Nov 19th 2017, 02:31 PM EST" },
-    //   { label: "Execution End Time", value: "Nov 19th 2017, 02:56 PM EST" },
+      // { label: "Cycle", value: "B11221.34321" },
+      // { label: "Execution Start Time", value: "Nov 19th 2017, 02:31 PM EST" },
+      // { label: "Execution End Time", value: "Nov 19th 2017, 02:56 PM EST" },
     ],
   },
 });
+
+
+// const report = require("multiple-cucumber-html-reporter");
+// import os from 'os';
+
+// // Using Multiple Cucumber HTML Report
+// report.generate({
+//   jsonDir: "test-results/HTMLReport/",
+//   reportPath: "test-results/HTMLReport/",
+//   reportName: "e-Offering Automation Report",
+//   displayDuration: true,
+//   openReportInBrowser: true,
+//   displayReportTime: true,
+//   metadata: {
+//     browser: {
+//       name: "chrome",
+//       version: "133.0.6943.60",
+//     },
+//     device: "Local test machine " + os.hostname,
+//     platform: {
+//       name: "windows",
+//       version: "11",
+//     },
+//   },
+//   customData: {
+//     title: "Test info",
+//     data: [
+//       { label: "Project", value: "e-Offering project" },
+//       { label: "Environment", value: "UAT" },
+//     //   { label: "Cycle", value: "B11221.34321" },
+//     //   { label: "Execution Start Time", value: "Nov 19th 2017, 02:31 PM EST" },
+//     //   { label: "Execution End Time", value: "Nov 19th 2017, 02:56 PM EST" },
+//     ],
+//   },
+// });
 
 
 // Using Cucumber HTML Report
