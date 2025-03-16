@@ -2,8 +2,8 @@ const report = require("multiple-cucumber-html-reporter");
 import os from 'os';
 
 // Get report paths from environment variables or use defaults
-const jsonDir = process.env.REPORT_JSON_DIR || "test-results/HTMLReport/";
-const reportPath = process.env.REPORT_PATH || "test-results/HTMLReport/";
+const jsonDir = "test-results/HTMLReport/";
+const reportPath = "test-results/HTMLReport/";
 
 // Using Multiple Cucumber HTML Report
 report.generate({

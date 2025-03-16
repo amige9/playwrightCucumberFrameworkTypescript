@@ -1,117 +1,4 @@
 
-# name: Playwright Automation Tests
-
-# # Trigger workflow on push or pull requests to main/master branches
-# on:
-#   push:
-#     branches: [ main, master ]
-#   pull_request:
-#     branches: [ main, master ]
-
-# jobs:
-#   test:
-#     name: Run Playwright Tests
-#     timeout-minutes: 60
-#     runs-on: windows-latest
-
-#     steps:
-#     - name: Check out repository
-#       uses: actions/checkout@v4
-
-#     - name: Set up Node.js
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: lts/*
-#         cache: 'npm'
-               
-#     - name: Install dependencies
-#       run: npm ci
-      
-#     - name: Install Playwright Browsers
-#       run: npx playwright install --with-deps
-      
-#     - name: Install report generation dependencies
-#       run: npm install -g cross-env 
-      
-#     - name: Run Cucumber tests with Playwright
-#       run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit 
-#       env:
-#         CI: true
-#       continue-on-error: true  # Continue workflow even if tests fail
-
-#     - name: Generate HTML report from Cucumber JSON
-#       if: always()
-#       run: npm run posttest
-#       continue-on-error: true  # Continue even if report generation fails
-        
-#     - name: Upload Cucumber reports
-#       if: always()
-#       uses: actions/upload-artifact@v4
-#       with:
-#         name: HTML Reports
-#         path: | 
-#           test-results/
-#           playwright-report/
-#         retention-days: 30
-
-# name: Playwright Automation Tests
-
-# # Trigger workflow on push or pull requests to main/master branches
-# on:
-#   push:
-#     branches: [ main, master ]
-#   pull_request:
-#     branches: [ main, master ]
-
-# jobs:
-#   test:
-#     name: Run Playwright Tests
-#     timeout-minutes: 60
-#     runs-on: windows-latest
-
-#     steps:
-#     - name: Check out repository
-#       uses: actions/checkout@v4
-
-#     - name: Set up Node.js
-#       uses: actions/setup-node@v4
-#       with:
-#         node-version: lts/*
-#         cache: 'npm'
-               
-#     - name: Install dependencies
-#       run: npm ci
-      
-#     - name: Install Playwright Browsers
-#       run: npx playwright install --with-deps
-      
-#     - name: Run Cucumber tests with Playwright
-#       run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit 
-#       env:
-#         CI: true
-#         REPORT_PATH: "./reports"  # Set standard report path
-#       continue-on-error: true  # Continue workflow even if tests fail
-
-#     - name: Generate HTML report from Cucumber JSON
-#       if: always()
-#       run: npm run posttest
-#       env:
-#         REPORT_PATH: "./reports"  # Use same report path
-#       continue-on-error: true  # Continue even if report generation fails
-        
-#     - name: Upload test reports
-#       if: always()
-#       uses: actions/upload-artifact@v4
-#       with:
-#         name: test-reports
-#         path: |
-#           reports/
-#           test-results/
-#           playwright-report/
-#           cucumber-report.json
-#           **/*.html
-#         retention-days: 30
-
 name: Playwright Automation Tests
 
 # Trigger workflow on push or pull requests to main/master branches
@@ -126,10 +13,6 @@ jobs:
     name: Run Playwright Tests
     timeout-minutes: 60
     runs-on: windows-latest
-    env:
-      # Set these environment variables for all steps
-      REPORT_JSON_DIR: "test-results/HTMLReport/"
-      REPORT_PATH: "test-results/HTMLReport/"
 
     steps:
     - name: Check out repository
@@ -147,6 +30,9 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
       
+    - name: Install report generation dependencies
+      run: npm install -g cross-env 
+      
     - name: Run Cucumber tests with Playwright
       run: npx cross-env ENV=test cucumber-js --tags="@Regression" --exit 
       env:
@@ -158,11 +44,13 @@ jobs:
       run: npm run posttest
       continue-on-error: true  # Continue even if report generation fails
         
-    - name: Upload test reports
+    - name: Upload Cucumber reports
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-reports
-        path: |
-          test-results/HTMLReport/
+        name: HTML Reports
+        path: | 
+          test-results/
+          playwright-report/
         retention-days: 30
+
