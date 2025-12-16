@@ -3,8 +3,8 @@ import  POManager  from "../../pageObject/POManager";
 import { Before, BeforeStep, Status, After, BeforeAll, AfterAll} from "@cucumber/cucumber";
 import { invokeBrowser } from '../helper/browsers/browserManager';
 import { getEnv } from '../helper/env/env';
-import { createLogger, Logger } from 'winston';
-import { options } from '../helper/utils/logger';
+import { Logger } from 'winston';
+import { createLogger } from '../helper/utils/logger';
 // import { Logger } from '../helper/types/logger';
 
 let browser: Browser;
@@ -21,10 +21,10 @@ BeforeAll({timeout: 60 * 1000},async function()
 
 Before( {timeout: 60 * 1000}, async function({pickle})
 {
-    const scenarioName = pickle.name + pickle.id;
+    const scenarioName = pickle.name;
     context = await browser.newContext();
     page = await context.newPage();
-    const logger = createLogger(options(scenarioName));
+    const logger = createLogger(scenarioName);
     page.logger = logger as Logger;
     this.page = page;
     this.poManager = new POManager(page); 
